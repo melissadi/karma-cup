@@ -15,3 +15,47 @@
  *= require foundation_and_overrides
 
  */
+.registration {
+  padding: 5em;
+}
+
+input[type="submit" i] {
+  background-color: #40B0DF;
+  padding: 1em 2em;
+  color: #FFFFFF;
+}
+
+.registration label, em, input[type="submit" i] {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+}
+.registration h2, .top-bar a {
+  color: #0067B3;
+  font-family: 'Questrial', sans-serif;
+  font-size: 35px;
+ }
+
+ .top-bar {
+   background-color: #0067B3;
+   height: 3.5em;
+  }
+
+ .devise-links {
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  padding-top: 1em;
+ }
+
+ .top-bar-section ul li > a {
+  font-size: 18px;
+ }
+
+ @media only screen and (min-width: 40.0625em) {
+
+  .top-bar-section li:not(.has-form) a:not(.button) {
+    color: #FFFFFF;
+    font-family: 'Questrial', sans-serif;
+    background-color: #0067B3;
+  }
+
+ }
