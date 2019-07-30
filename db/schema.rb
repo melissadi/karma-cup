@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_171215) do
+ActiveRecord::Schema.define(version: 2019_07_30_190158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,14 +32,6 @@ ActiveRecord::Schema.define(version: 2019_07_30_171215) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["store_id"], name: "index_admins_on_store_id"
-  end
-
-  create_table "rewards", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.integer "point_value", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "stores", force: :cascade do |t|
