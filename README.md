@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+$ npm install --save react-router-dom
+$ npm install --save prop-types
