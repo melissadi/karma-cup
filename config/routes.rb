@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :update]
+    end
+  end
+
   get '*page', to: 'static_pages#index', constraints: ->(req) do
   !req.xhr? && req.format.html?
   end
