@@ -17,9 +17,8 @@ class CustomerTile extends Component {
     let formPayload = {
       points: this.state.selectedCustomer.points + 10
     }
-    console.log(formPayload)
 
-    fetch(`/api/v1/users/${this.props.customer.id}`, {
+    fetch(`/api/v1/users/${this.props.customer[0].id}`, {
       method: 'PATCH',
       body: JSON.stringify(formPayload),
       credentials: 'same-origin',
@@ -31,15 +30,15 @@ class CustomerTile extends Component {
   }
 
   componentDidMount(){
-    let customer = this.props.customer
+    let customer = this.props.customer[0]
     this.setState({ selectedCustomer: customer })
   }
 
   render(){
     return (
       <div className="customer">
-        <p className="columns large-4">{this.props.customer.email}</p>
-        <p className="columns large-4">{this.props.customer.first_name} {this.props.customer.last_name}</p>
+        <p className="columns large-4">{this.props.customer[0].email}</p>
+        <p className="columns large-4">{this.props.customer[0].first_name} {this.props.customer[0].last_name}</p>
         <p className="columns large-4">{this.state.selectedCustomer.points} points available</p>
         <button onClick={this.handleClick} className="button small" type="button">Give 10 Points</button>
       </div>
