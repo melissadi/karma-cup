@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import SearchBar from '../components/SearchBar'
+import CustomerTile from '../components/CustomerTile'
 
 class AdminShowContainer extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class AdminShowContainer extends Component {
     this.state = {
       adminObject: {},
       searchResults: [],
-      searchString: ""
+      searchString: "",
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -33,6 +34,11 @@ class AdminShowContainer extends Component {
     .then(response => response.json())
     .then(body => this.setState({ searchResults: body }))
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  giveCustomerPoints(event){
+    event.preventDefault()
+
   }
 
   componentDidMount(){
@@ -67,7 +73,11 @@ class AdminShowContainer extends Component {
       users = this.state.searchResults.map(user => {
         i ++
         return(
-          <p key={i}>{user.email}</p>
+          <CustomerTile
+            customer={user}
+            key={user.id}
+            handleClick={this.handleClick}
+          />
         )
       })
     }
@@ -75,14 +85,15 @@ class AdminShowContainer extends Component {
       return(
       <div className="return">
         <p>What would you like to do?</p>
-        <div className="columns large-6 option">
+        <div className="rows option">
           <Link to={`/admins/${this.props.match.params.id}/stores/${storeId}`}><h2>View {storeName}'s Rewards</h2></Link>
         </div>
-        <div className="columns large-6 option">
+        <div className="rows option">
           <h2>Reward Customer</h2>
           <SearchBar
             handleSubmit={this.handleSubmit}
             handleChange={this.handleChange}
+            searchString={this.state.searchString}
           />
           {users}
         </div>
