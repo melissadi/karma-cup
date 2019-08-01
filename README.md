@@ -26,3 +26,4 @@ Things you may want to cover:
 
 $ npm install --save react-router-dom
 $ npm install --save prop-types
+$ npm install --save react-qr-reader

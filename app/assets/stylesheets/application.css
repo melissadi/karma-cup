@@ -101,6 +101,26 @@ font-size: 35px;
   width: 200px;
 }
 
+.scanner-section {
+  max-width: 400px;
+  max-height: 400px;
+  margin: auto;
+}
+
+.reward-section button {
+  width: 250px;
+  radius: 5px;
+}
+
+button.round, .button.round {
+  display: inline-block;
+  margin: auto;
+}
+
+.reward-button {
+  margin: 1em;
+}
+
 
 @media only screen and (min-width: 40.0625em) {
   .top-bar-section li:not(.has-form) a:not(.button) {
