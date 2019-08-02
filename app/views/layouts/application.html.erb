@@ -23,9 +23,12 @@
       <ul class="right">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+        <%- elsif current_admin -%>
+          <li><%= link_to 'Sign Out', destroy_admin_session_path, method: :delete %></li>
         <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'User Sign Up', new_user_registration_path %></li>
+          <li><%= link_to 'User Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Admin Sign In', new_admin_session_path %></li>
         <%- end -%>
       </ul>
     </section>
