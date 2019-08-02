@@ -35,6 +35,10 @@ input[type="submit" i] {
   font-size: 35px;
  }
 
+button:focus {
+ outline:0;
+}
+
 .top-bar {
  background-color: #0067B3;
  height: 3.5em;

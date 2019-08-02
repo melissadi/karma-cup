@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
 
-  # resources :admins, only: [:show]
-  # resources :users, only: [:index, :show]
+  resources :admins, only: [:show, :index, :create]
+  resources :users, only: [:index, :show, :create]
 
   namespace :api do
     namespace :v1 do
@@ -24,8 +24,4 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*page', to: 'static_pages#index', constraints: ->(req) do
-  !req.xhr? && req.format.html?
-  end
-  root 'static_pages#index'
 end
