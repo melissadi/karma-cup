@@ -1,7 +1,9 @@
 import React, { Component } from "react"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { Link } from "react-router-dom"
 import SearchBar from '../components/SearchBar'
 import CustomerTile from '../components/CustomerTile'
+import AdminRewardsContainer from './AdminRewardsContainer'
 import QrScanner from '../components/QrScanner'
 
 class AdminShowContainer extends Component {
@@ -59,7 +61,6 @@ class AdminShowContainer extends Component {
     .then(body => this.setState({ searchedUser: body }))
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
 
   componentDidMount(){
     let adminId = this.props.match.params.id
@@ -125,13 +126,18 @@ class AdminShowContainer extends Component {
       points = this.state.searchedUser[0].points
     }
 
+    let rewardsLink = <h2>View Rewards</h2>
+    if (this.state.adminObject.store){
+      rewardsLink = `${this.state.adminObject.id}/stores/${this.state.adminObject.store.id}/rewards`
+    }
+
     return(
     <div className="return">
       <p>What would you like to do?</p>
-      <div className="rows option">
-        <Link to={`/admins/${this.props.match.params.id}/stores/${storeId}`}><h2>View {storeName}'s Rewards</h2></Link>
+      <div className="admin-section rows option">
+        <Link to={rewardsLink}><h2>View Rewards</h2></Link>
       </div>
-      <div className="reward-section rows option">
+      <div className="admin-section rows option">
         <h2>Reward Customer</h2>
         <div className="reward-button">
           <button onClick={this.toggleSearch} className="button round" type="button">Find Customer By Email</button>
@@ -142,6 +148,7 @@ class AdminShowContainer extends Component {
           <button onClick={this.toggleScanner} className="button round" type="button">Scan Customer Code</button>
         </div>
         {scanner}
+
       </div>
     </div>
     )

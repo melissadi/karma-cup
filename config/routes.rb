@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
   devise_for :admins
   devise_for :users
 
-  resources :admins, only: [:show, :index, :create]
-  resources :users, only: [:index, :show, :create]
-
   namespace :api do
     namespace :v1 do
-      resources :admins, only: [:show]
-        resources :stores, only: [:index, :show]
+      resources :admins, only: [:show] do
+        resources :stores, only: [:index, :show] do
+          resources :rewards, only: [:index, :show, :delete, :update, :create]
+        end
       end
     end
+  end
 
   namespace :api do
     namespace :v1 do
@@ -22,7 +21,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :update]
+      resources :stores, only: [:index, :show, :update]
+      resources :rewards, only: [:index, :show]
     end
   end
+
+  get '*page', to: 'static_pages#index', constraints: ->(req) do
+  !req.xhr? && req.format.html?
+  end
+  root 'static_pages#index'
 
 end
