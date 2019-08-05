@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :admins, only: [:show] do
         resources :stores, only: [:index, :show] do
-          resources :rewards, only: [:index, :show, :delete, :update, :create]
+          resources :rewards, only: [:index, :show]
         end
       end
     end
@@ -21,14 +21,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :update]
-      resources :stores, only: [:index, :show, :update]
-      resources :rewards, only: [:index, :show]
+      resources :stores, only: [:index, :show, :update] do
+        resources :rewards, only: [:index, :show, :create, :delete, :update]
+      end
     end
   end
 
   get '*page', to: 'static_pages#index', constraints: ->(req) do
   !req.xhr? && req.format.html?
   end
-  root 'static_pages#index'
+  root 'welcome#index'
 
 end
