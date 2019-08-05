@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(admin)
-    admin = Admin.find_by_email(params["admin"]["email"])
+    "/admins/#{admin.id}"
   end
 
    protected

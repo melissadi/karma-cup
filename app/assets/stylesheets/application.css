@@ -111,7 +111,7 @@ font-size: 35px;
   margin: auto;
 }
 
-.reward-section button {
+.admin-section button {
   width: 250px;
   radius: 5px;
 }
@@ -125,6 +125,15 @@ button.round, .button.round {
   margin: 1em;
 }
 
+.rewards-tile {
+  background-color: #FFD53D80;
+  border-radius: 5px;
+  margin: 1em;
+}
+
+.admin-section {
+  overflow: auto;
+}
 
 @media only screen and (min-width: 40.0625em) {
   .top-bar-section li:not(.has-form) a:not(.button) {
