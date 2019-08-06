@@ -17,21 +17,23 @@ class RewardTile extends Component {
 
     return(
       <div className="rewards-tile">
-      <h1>{this.props.name}</h1>
-      <p>{this.props.description}</p>
-      <p>{this.props.pointValue}</p>
-      <button onClick={this.togglePopup.bind(this)}>Edit</button>
-      {this.state.showPopup ?
-        <Popup
-        text="Edit Reward"
-        closePopup={this.togglePopup.bind(this)}
-        rewardId={this.props.rewardId}
-        storeId={this.props.storeId}
-        selectReward={this.props.selectReward}
-        closePopup={this.togglePopup.bind(this)}
-        />
-        : null
-      }
+        <div className="text">
+          <h1>{this.props.name}</h1>
+          <p>{this.props.description}</p>
+          <p>Points Needed: {this.props.pointValue}</p>
+        </div>
+        <button onClick={this.togglePopup.bind(this)}>Edit</button>
+        {this.state.showPopup ?
+          <Popup
+          text="Edit Reward"
+          closePopup={this.togglePopup.bind(this)}
+          rewardId={this.props.rewardId}
+          storeId={this.props.storeId}
+          selectReward={this.props.selectReward}
+          closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
       </div>
     )
   }

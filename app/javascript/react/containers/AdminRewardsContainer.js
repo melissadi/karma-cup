@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import RewardTile from '../components/RewardTile'
 import Popup from '../components/Popup'
+import { Link } from "react-router-dom"
 
 class AdminRewardsContainer extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class AdminRewardsContainer extends Component {
       storeObject: {
         rewards: []
       },
-      selectedReward: {},
       showPopup: false
     }
     this.updateRewards = this.updateRewards.bind(this)
@@ -21,15 +21,28 @@ class AdminRewardsContainer extends Component {
   }
 
   updateRewards(newReward){
-    this.setState ({ storeObject: {
+    this.setState ({
+      storeObject: {
+        ...this.state.storeObject,
         rewards: this.state.storeObject.rewards.concat(newReward)
       }
     })
     this.togglePopup()
   }
 
-  selectReward(reward){
-    this.setState({ selectedReward: reward })
+  selectReward(editedReward){
+    this.setState({
+      storeObject: {
+        ...this.state.storeObject,
+        rewards: this.state.storeObject.rewards.map(reward => {
+          if (reward.id === editedReward.id){
+            return editedReward
+          } else {
+            return reward
+          }
+        })
+      }
+    })
   }
 
   componentDidMount(){
@@ -68,11 +81,23 @@ class AdminRewardsContainer extends Component {
         )
       })
     }
+    let adminLink
+    if (this.state.storeObject.admins){
+      adminLink = `/admins/${this.state.storeObject.admins[0].id}`
+    } else {
+      adminLink = `#`
+    }
 
     return(
-      <div className="rewards-container">
-        {rewards}
-        <button onClick={this.togglePopup.bind(this)}>Add Reward</button>
+      <div className="rewards-page">
+        <Link to={adminLink}>Go Back</Link>
+        <div className="rewards-container">
+          {rewards}
+          <div className="rewards-tile">
+            <div className="text"></div>
+            <button onClick={this.togglePopup.bind(this)}>Add New Reward</button>
+          </div>
+        </div>
         {this.state.showPopup ?
         <Popup
           text="Add A Reward"
