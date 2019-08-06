@@ -22,6 +22,13 @@ class Api::V1::RewardsController < ApplicationController
     render json: @reward
   end
 
+  def destroy
+    @reward = Reward.find(params[:id])
+    @reward.delete
+    @rewards = Reward.all
+    render json: @rewards
+  end
+
   private
 
   def reward_params

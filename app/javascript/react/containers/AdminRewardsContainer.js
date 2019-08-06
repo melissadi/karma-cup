@@ -14,6 +14,7 @@ class AdminRewardsContainer extends Component {
     }
     this.updateRewards = this.updateRewards.bind(this)
     this.selectReward = this.selectReward.bind(this)
+    this.deleteReward = this.deleteReward.bind(this)
   }
 
   togglePopup(){
@@ -45,6 +46,29 @@ class AdminRewardsContainer extends Component {
     })
   }
 
+  removeDeletedReward(updatedRewards){
+    this.setState({
+      storeObject: {
+        ...this.state.storeObject,
+        rewards: updatedRewards
+          }
+      })
+  }
+
+
+  deleteReward(rewardToDelete){
+    let body = JSON.stringify(rewardToDelete)
+    fetch (`/api/v1/stores/${this.state.storeObject.id}/rewards/${rewardToDelete.id}`, {
+      method: 'DELETE',
+      body: body,
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+      .then(response => response.json())
+      .then(body => this.removeDeletedReward(body["rewards"]))
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
   componentDidMount(){
     let adminId = this.props.match.params.admin_id
     let storeId = this.props.match.params.store_id
@@ -66,7 +90,9 @@ class AdminRewardsContainer extends Component {
 
   render(){
     let rewards
+    let storeId
     if (this.state.storeObject.rewards != []){
+      storeId = this.state.storeObject.id
       rewards = this.state.storeObject.rewards.map(reward => {
         return(
             <RewardTile
@@ -75,8 +101,10 @@ class AdminRewardsContainer extends Component {
               description={reward.description}
               pointValue={reward.point_value}
               rewardId={reward.id}
-              storeId={this.state.storeObject.id}
+              reward={reward}
+              storeId={storeId}
               selectReward={this.selectReward}
+              deleteReward={this.deleteReward}
             />
         )
       })
