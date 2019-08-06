@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_admin! || :authenticate_user!
+  before_action :authenticate_admin!, except: [:show]
 
   def search
     @user = User.where(email: params['search_string'])

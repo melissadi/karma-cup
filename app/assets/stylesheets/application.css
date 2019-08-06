@@ -26,6 +26,10 @@
    height: 80%;
  }
 
+#app {
+  height: 100%
+}
+
 .header-image {
   background: no-repeat url('./alonecup.jpg');
   width: 700px;
@@ -111,6 +115,24 @@ input[type="submit" i] {
 
 button {
   width: 13em;
+}
+
+.first-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 1em;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+}
+
+.user-dashboard {
+  background: url('./cafe.png');
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  padding: 5em 10em;
 }
 
 .rewards-tile {

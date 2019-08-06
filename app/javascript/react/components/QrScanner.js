@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
 
 class QrScanner extends Component {
