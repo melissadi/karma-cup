@@ -1,12 +1,19 @@
 import React, { Component } from "react"
 import QRCode from 'qrcode.react'
+import UserRewardsContainer from './UserRewardsContainer'
+import UserRewardsPopup from './UserRewardsPopup'
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userObject: {}
+      userObject: {},
+      showRewardsPopup: false
     }
+  }
+
+  toggleRewardsPopup(){
+    this.setState({ showRewardsPopup: !this.state.showRewardsPopup})
   }
 
   componentDidMount(){
@@ -46,6 +53,7 @@ class UserDashboard extends Component {
         />
     }
 
+
     return(
       <div className="user-dashboard">
        <div className="first-section">
@@ -57,6 +65,17 @@ class UserDashboard extends Component {
           <p>Your QR Code:</p>
           {qrcode}
         </div>
+       </div>
+       <div className="second-section">
+         <button onClick={this.toggleRewardsPopup.bind(this)}>View Rewards</button>
+         {this.state.showRewardsPopup ?
+           <UserRewardsPopup
+             closePopup={this.toggleRewardsPopup.bind(this)}
+             userPointValue={this.state.userObject.points}
+           />
+           : null
+         }
+         <button onClick={this.toggleRewards} className="button round" type="button">Find Store</button>
        </div>
       </div>
     )

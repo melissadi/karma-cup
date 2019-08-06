@@ -25,7 +25,7 @@ class Api::V1::RewardsController < ApplicationController
   def destroy
     @reward = Reward.find(params[:id])
     @reward.delete
-    @rewards = Reward.all
+    @rewards = Reward.where(store_id: params[:store_id])
     render json: @rewards
   end
 

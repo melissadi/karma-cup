@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Popup from '../components/Popup'
+import FormPopup from '../components/FormPopup'
 
 class RewardTile extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class RewardTile extends Component {
         <button onClick={this.togglePopup.bind(this)}>Edit</button>
         <button onClick={this.handleClick}>Delete</button>
         {this.state.showPopup ?
-          <Popup
+          <FormPopup
           text="Edit Reward"
           closePopup={this.togglePopup.bind(this)}
           rewardId={this.props.rewardId}

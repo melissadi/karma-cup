@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import RewardTile from '../components/RewardTile'
-import Popup from '../components/Popup'
+import FormPopup from '../components/FormPopup'
 import { Link } from "react-router-dom"
 
 class AdminRewardsContainer extends Component {
@@ -127,7 +127,7 @@ class AdminRewardsContainer extends Component {
           </div>
         </div>
         {this.state.showPopup ?
-        <Popup
+        <FormPopup
           text="Add A Reward"
           closePopup={this.togglePopup.bind(this)}
           storeId={this.state.storeObject.id}
