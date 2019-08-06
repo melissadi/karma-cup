@@ -7,10 +7,16 @@ class RewardTile extends Component {
     this.state = {
       showPopup: false
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   togglePopup(){
     this.setState({ showPopup: !this.state.showPopup })
+  }
+
+  handleClick(){
+    event.preventDefault()
+    this.props.deleteReward(this.props.reward)
   }
 
   render(){
@@ -23,6 +29,7 @@ class RewardTile extends Component {
           <p>Points Needed: {this.props.pointValue}</p>
         </div>
         <button onClick={this.togglePopup.bind(this)}>Edit</button>
+        <button onClick={this.handleClick}>Delete</button>
         {this.state.showPopup ?
           <Popup
           text="Edit Reward"
