@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :users
+  devise_for :admins, path: 'admins'
+  devise_for :users, path: 'users'
 
   namespace :api do
     namespace :v1 do
