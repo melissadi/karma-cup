@@ -89,7 +89,7 @@ class AdminShowContainer extends Component {
     }
 
     let user
-    if (this.state.searchedUser && this.state.showSearch){
+    if (this.state.searchedUser != null && this.state.showSearch){
       user =
           <CustomerTile
             customer={this.state.searchedUser}
@@ -121,7 +121,7 @@ class AdminShowContainer extends Component {
 
     let name
     let points
-    if (this.state.searchedUser){
+    if (this.state.searchedUser != null){
       name = `${this.state.searchedUser[0].first_name} ${this.state.searchedUser[0].last_name}`
       points = this.state.searchedUser[0].points
     }
