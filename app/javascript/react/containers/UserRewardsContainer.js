@@ -43,7 +43,7 @@ class UserRewardsContainer extends Component {
     }
 
     return(
-      <div>
+      <div className="rewardsContainerInPopup">
         {rewards}
       </div>
     )

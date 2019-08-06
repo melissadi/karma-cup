@@ -61,6 +61,7 @@
   background-color: rgba(0,0,0, 0.5);
 }
 
+
 .popup\_inner {
   position: absolute;
   left: 25%;
@@ -80,6 +81,25 @@
   background-color: #FFFFFF;
   border-radius: 5px;
   padding: 1em;
+}
+
+.reward-container-popup {
+  width: 1000px;
+  height: 1000px;
+  border: 5px solid #0067B3;
+  margin: auto;
+  margin-top: 2em;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  padding: 1em;
+  overflow: auto;
+}
+
+.rewardsContainerInPopup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .registration {
