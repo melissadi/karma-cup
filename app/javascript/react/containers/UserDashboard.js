@@ -1,11 +1,23 @@
 import React, { Component } from "react"
 import QRCode from 'qrcode.react'
+import UserRewardsContainer from './UserRewardsContainer'
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userObject: {}
+      userObject: {},
+      showRewards: false
+    }
+    this.toggleRewards = this.toggleRewards.bind(this)
+  }
+
+  toggleRewards(event){
+    event.preventDefault()
+    if (this.state.showRewards){
+      this.setState({ showRewards: false })
+    } else {
+      this.setState({ showRewards: true })
     }
   }
 
@@ -36,6 +48,14 @@ class UserDashboard extends Component {
       pointsStats = `You don't have any points at the moment. Remember your cup to earn some today!`
     }
 
+    let rewards
+    if (this.state.showRewards){
+      rewards =
+        <UserRewardsContainer
+          userPointValue={this.state.userObject.points}
+        />
+    }
+
     let qrcode
     if (this.state.userObject.email){
       qrcode =
@@ -57,6 +77,12 @@ class UserDashboard extends Component {
           <p>Your QR Code:</p>
           {qrcode}
         </div>
+       </div>
+       <div className="second-section">
+         <button onClick={this.toggleRewards} className="button round" type="button">View Rewards</button>
+         <button onClick={this.toggleRewards} className="button round" type="button">Point History</button>
+         <button onClick={this.toggleRewards} className="button round" type="button">Find Store</button>
+         {rewards}
        </div>
       </div>
     )

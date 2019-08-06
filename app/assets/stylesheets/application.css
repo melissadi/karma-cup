@@ -128,11 +128,9 @@ button {
 }
 
 .user-dashboard {
-  background: url('./cafe.png');
   width: 100%;
   height: 100%;
-  background-size: cover;
-  padding: 5em 10em;
+  padding: 3em 10em;
 }
 
 .rewards-tile {
