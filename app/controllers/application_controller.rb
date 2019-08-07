@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(admin)
-    "/admins/#{admin.id}"
-  end
-
-  def after_sign_in_path_for(user)
-    "/users/#{user.id}"
+    if admin.class == Admin
+      "/admins/#{admin.id}"
+    elsif admin.class == User
+      "/users/#{admin.id}"
+    end
   end
 
    protected

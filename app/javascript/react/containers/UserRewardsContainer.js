@@ -36,14 +36,14 @@ class UserRewardsContainer extends Component {
             key={reward.id}
             reward={reward}
             store={reward.store}
-            userPointValue={this.props.userPointValue}
+            userPoints={this.props.userPoints}
           />
         )
       })
     }
 
     return(
-      <div className="rewardsContainerInPopup">
+      <div className="user-view">
         {rewards}
       </div>
     )

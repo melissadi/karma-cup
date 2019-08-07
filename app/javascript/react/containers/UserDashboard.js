@@ -1,19 +1,28 @@
 import React, { Component } from "react"
-import QRCode from 'qrcode.react'
+import QrCode from '../components/QrCode'
 import UserRewardsContainer from './UserRewardsContainer'
-import UserRewardsPopup from './UserRewardsPopup'
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       userObject: {},
-      showRewardsPopup: false
+      selectQrCode: false,
+      selectRewards: false,
+      selectStore: false,
     }
+    this.toggleQrCode = this.toggleQrCode.bind(this)
+    this.toggleRewards = this.toggleRewards.bind(this)
   }
 
-  toggleRewardsPopup(){
-    this.setState({ showRewardsPopup: !this.state.showRewardsPopup})
+  toggleRewards(event){
+    this.setState({ selectRewards: !this.state.selectRewards})
+    this.setState({ selectQrCode: false })
+  }
+
+  toggleQrCode(event){
+    this.setState({ selectQrCode: !this.state.selectQrCode})
+    this.setState({ selectRewards: false })
   }
 
   componentDidMount(){
@@ -38,45 +47,50 @@ class UserDashboard extends Component {
 
     let pointsStats
     if (this.state.userObject.points && this.state.userObject.points > 0){
-      pointsStats = `You have ${this.state.userObject.points} points`
+      pointsStats = `You have ${this.state.userObject.points} points.`
     } else {
       pointsStats = `You don't have any points at the moment. Remember your cup to earn some today!`
     }
 
     let qrcode
-    if (this.state.userObject.email){
+    let qrSelected
+    if (this.state.selectQrCode){
       qrcode =
-        <QRCode
-          value={this.state.userObject.email}
-          size={300}
-          fgColor="#1B7B34"
+        <QrCode
+          userEmail={this.state.userObject.email}
         />
+      qrSelected = "selected"
+    }
+
+    let rewards
+    let rewardsSelected
+    if (this.state.selectRewards){
+      rewards =
+        <UserRewardsContainer
+          userPoints={this.state.userObject.points}
+        />
+      rewardsSelected = "selected"
     }
 
 
     return(
       <div className="user-dashboard">
-       <div className="first-section">
-        <div className="text">
-          <p>Welcome, {this.state.userObject.first_name}.</p>
-          <p>{pointsStats}</p>
+
+        <div className="header">
+          <h1>Welcome, {this.state.userObject.first_name}. {pointsStats}</h1>
         </div>
-        <div className="qr-code">
-          <p>Your QR Code:</p>
+
+        <div className="user-options">
+          <div><button type="button" className={qrSelected} onClick={this.toggleQrCode}>My QR Code</button></div>
+          <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Rewards</button></div>
+          <div><button>Cafes Near Me</button></div>
+        </div>
+
+        <div className="drawer">
           {qrcode}
+          {rewards}
         </div>
-       </div>
-       <div className="second-section">
-         <button onClick={this.toggleRewardsPopup.bind(this)}>View Rewards</button>
-         {this.state.showRewardsPopup ?
-           <UserRewardsPopup
-             closePopup={this.toggleRewardsPopup.bind(this)}
-             userPointValue={this.state.userObject.points}
-           />
-           : null
-         }
-         <button onClick={this.toggleRewards} className="button round" type="button">Find Store</button>
-       </div>
+
       </div>
     )
   }

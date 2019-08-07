@@ -7,7 +7,7 @@ const SearchBar = (props) => {
       <label>Enter Customer Email:</label>
       <div className="search-field">
         <input type="text" name="searchString" value={props.searchString} onChange={props.handleChange} />
-        <input className="button round" type="submit" value="Search"/>
+        <input className="button" type="submit" value="Search"/>
       </div>
     </form>
   )
