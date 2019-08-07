@@ -16,6 +16,11 @@
 
  */
 
+body {
+
+}
+
+
  .home {
    display: flex;
    flex-direction: row;
@@ -25,10 +30,6 @@
    align-items: center;
    height: 80%;
  }
-
-#app {
-  height: 100%
-}
 
 .header-image {
   background: no-repeat url('./alonecup.jpg');
@@ -61,7 +62,6 @@
   background-color: rgba(0,0,0, 0.5);
 }
 
-
 .popup\_inner {
   position: absolute;
   left: 25%;
@@ -81,25 +81,6 @@
   background-color: #FFFFFF;
   border-radius: 5px;
   padding: 1em;
-}
-
-.reward-container-popup {
-  width: 1000px;
-  height: 1000px;
-  border: 5px solid #0067B3;
-  margin: auto;
-  margin-top: 2em;
-  background-color: #FFFFFF;
-  border-radius: 5px;
-  padding: 1em;
-  overflow: auto;
-}
-
-.rewardsContainerInPopup {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .registration {
@@ -147,22 +128,59 @@ button {
   font-size: 20px;
 }
 
+/* User Dashboard Styling */
+
 .user-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-options {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  height: 100%;
-  padding: 3em 10em;
+  justify-content: space-evenly;
+}
+
+.user-options button {
+  width: 30em;
+}
+
+.drawer {
+  width: 100%;
+  display: flex;
+}
+
+.user-view {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.header {
+  width: 100%;
+  height: 200px;
+}
+
+.header h1 {
+  color: #303C6C;
+  text-align: center;
+  font-size: 3em;
+  padding: 1em;
 }
 
 .rewards-tile {
   height: 400px;
   width: 300px;
+  background-color: #B4DFE580;
   display: flex;
   flex-direction: column;
-  border: 1px solid #EAB126;
   border-radius: 5px;
   margin: 1em;
   padding: 1em;
-  box-shadow: 2px 3px 3px #47474480;
+  box-shadow: 2px 3px 3px #000000;
   align-items: center;
 }
 
@@ -170,19 +188,44 @@ button {
   height: 300px;
 }
 
-button:focus {
- outline:0;
+.rewards-tile h1, .rewards-tile h2 {
+  color: #000000;
 }
 
+.rewards-tile p {
+  color: #000000;
+}
+
+button, .button {
+  background-color: #303C6C;
+  color: #FFFFFF;
+  transition: background-color 100ms ease-out;
+}
+
+button:hover, button:focus, button.selected {
+  background-color: #B4DFE5;
+  outline:0;
+  color: #303C6C;
+}
+
+/* Navigation */
+
 .top-bar {
-  background-color: #0067B3;
+  background-color: #F4976C;
   height: 3.5em;
+}
+
+.top-bar-section ul li:hover:not(.has-form) > a {
+  background-color: none;
+  color: #FFFFFF;
+  background: none;
 }
 
 .devise-links {
   font-size: 18px;
   padding-top: 1em;
 }
+
 
 p, .devise-links {
   font-family: 'Lato', sans-serif;
@@ -196,7 +239,7 @@ p, .devise-links {
 .option h2 {
   font-family: 'Questrial', sans-serif;
   font-size: 30px;
-  color: #0067B3;
+  color: #5CDB95;
 }
 
 .option {
@@ -268,6 +311,11 @@ button.round, .button.round {
   .top-bar-section li:not(.has-form) a:not(.button) {
     color: #FFFFFF;
     font-family: 'Questrial', sans-serif;
-    background-color: #0067B3;
+    background-color: #F4976C;
+  }
+
+  .top-bar-section li:not(.has-form) a:not(.button):hover {
+    background-color: #F4976C;
+    background: #F4976C;
   }
 }
