@@ -14,31 +14,35 @@ class AdminDashboard extends Component {
       searchedUser: null,
       searchString: "",
       showSearch: false,
-      showScanner: false,
-      scannedUser: null,
+      showRewards: false,
+      showScanner: false
     }
+    this.toggleRewards = this.toggleRewards.bind(this)
+    this.toggleScanner = this.toggleScanner.bind(this)
+    this.toggleSearch = this.toggleSearch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.toggleSearch = this.toggleSearch.bind(this)
-    this.toggleScanner = this.toggleScanner.bind(this)
-  }
-
-  toggleSearch(event){
-    event.preventDefault()
-    if (this.state.showSearch){
-      this.setState({ showSearch: false })
-    } else {
-      this.setState({ showSearch: true })
-    }
   }
 
   toggleScanner(event){
     event.preventDefault()
-    if (this.state.showScanner){
-      this.setState({ showScanner: false })
-    } else {
-      this.setState({ showScanner: true })
-    }
+    this.setState ({ showScanner: !this.state.showScanner })
+    this.setState ({ showRewards: false })
+    this.setState ({ showSearch: false })
+  }
+
+  toggleRewards(event){
+    event.preventDefault()
+    this.setState ({ showRewards: !this.state.showRewards })
+    this.setState ({ showSearch: false })
+    this.setState ({ showScanner: false })
+  }
+
+  toggleSearch(event){
+    event.preventDefault()
+    this.setState ({ showSearch: !this.state.showSearch })
+    this.setState ({ showScanner: false })
+    this.setState ({ showRewards: false })
   }
 
   handleChange(event) {
@@ -81,6 +85,13 @@ class AdminDashboard extends Component {
   }
 
   render(){
+    let name
+    let points
+    if (this.state.searchedUser != null){
+      name = `${this.state.searchedUser[0].first_name} ${this.state.searchedUser[0].last_name}`
+      points = this.state.searchedUser[0].points
+    }
+
     let storeId = "#"
     let storeName = ""
     if (this.state.adminObject.store){
@@ -88,16 +99,30 @@ class AdminDashboard extends Component {
       storeName = this.state.adminObject.store.name
     }
 
-    let user
-    if (this.state.searchedUser != null && this.state.showSearch){
-      user =
-          <CustomerTile
-            customer={this.state.searchedUser}
-            key={this.state.searchedUser.id}
-            handleClick={this.handleClick}
-          />
+    let rewardsSelected
+    let rewards
+    if (this.state.showRewards){
+      rewards =
+        <AdminRewardsContainer
+          adminId={this.state.adminObject.id}
+          storeId={this.state.adminObject.store.id}
+        />
+      rewardsSelected = "selected"
     }
 
+    let scannerSelected
+    let scanner
+    if (this.state.showScanner){
+      scanner =
+        <div className="scanner-section">
+          <QrScanner
+          />
+        </div>
+      scannerSelected = "selected"
+    }
+
+    let user
+    let searchSelected
     let search
     if (this.state.showSearch){
       search =
@@ -108,48 +133,38 @@ class AdminDashboard extends Component {
             searchString={this.state.searchString}
           />
         </div>
-    }
-
-    let scanner
-    if (this.state.showScanner){
-      scanner =
-        <div className="scanner-section">
-          <QrScanner
+      searchSelected = "selected"
+      if (this.state.searchedUser != null){
+        user =
+          <CustomerTile
+            customer={this.state.searchedUser}
+            key={this.state.searchedUser.id}
+            handleClick={this.handleClick}
           />
-        </div>
-    }
-
-    let name
-    let points
-    if (this.state.searchedUser != null){
-      name = `${this.state.searchedUser[0].first_name} ${this.state.searchedUser[0].last_name}`
-      points = this.state.searchedUser[0].points
-    }
-
-    let rewardsLink = <h2>View Rewards</h2>
-    if (this.state.adminObject.store){
-      rewardsLink = `${this.state.adminObject.id}/stores/${this.state.adminObject.store.id}/rewards`
+      }
     }
 
     return(
-    <div className="return">
-      <p>What would you like to do?</p>
-      <div className="admin-section rows option">
-        <Link to={rewardsLink}><h2>View Rewards</h2></Link>
+    <div className="admin-dashboard">
+
+      <div className="header">
+        <h1>Welcome, {storeName} admin!</h1>
+        <h2>What would you like to do?</h2>
       </div>
-      <div className="admin-section rows option">
-        <h2>Reward Customer</h2>
-        <div className="reward-button">
-          <button onClick={this.toggleSearch} className="button round" type="button">Find Customer By Email</button>
-        </div>
+
+      <div className="admin-options">
+        <div><button type="button" className={searchSelected} onClick={this.toggleSearch}>Reward Customer by Email</button></div>
+        <div><button type="button" className={scannerSelected} onClick={this.toggleScanner}>Scan Customer Code</button></div>
+        <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Update Store Rewards</button></div>
+      </div>
+
+      <div className="drawer">
+        {scanner}
         {search}
         {user}
-        <div className="reward-button">
-          <button onClick={this.toggleScanner} className="button round" type="button">Scan Customer Code</button>
-        </div>
-        {scanner}
-
+        {rewards}
       </div>
+
     </div>
     )
   }

@@ -130,50 +130,82 @@ button {
 
 /* User Dashboard Styling */
 
-.user-dashboard {
+.user-dashboard, .admin-dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.user-options {
+.user-options, .admin-options {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   max-width: 100%;
 }
 
-.user-options button {
+.user-options button, .admin-options button {
   width: 30em;
 }
 
 .drawer {
   max-width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.user-view {
+.user-view, .admin-view {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.qrCode {
-  padding: 4em;
-}
-
 .header {
   width: 100%;
   height: 200px;
+  text-align: center;
 }
 
 .header h1 {
   color: #303C6C;
-  text-align: center;
   font-size: 3em;
-  padding: 1em;
+  padding-top: 1em;
+  font-family: 'Questrial', sans-serif;
 }
+
+.header h2 {
+  color: #303C6C;
+  font-size: 1.5em;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Admin Dashboard */
+
+.qrCode {
+  padding: 4em;
+}
+
+.search {
+  text-align: left;
+  padding: 1em;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-field {
+  width: 30em;
+  text-align: center;
+}
+
+.search-section label {
+  font-size: 1em;
+  cursor: default;
+}
+
+submit {
+  width: 30em;
+}
+
 
 /* Rewards Tiles */
 
@@ -206,16 +238,20 @@ button {
   border-radius: 100px;
 }
 
-button, .button {
+button, .button, .registration label, em, input[type="submit" i] {
   background-color: #303C6C;
   color: #FFFFFF;
   transition: background-color 100ms ease-out;
 }
 
-button:hover, button:focus, button.selected {
+.button:hover, .button:focus, button:hover, button:focus, button.selected {
   background-color: #B4DFE5;
   outline:0;
   color: #303C6C;
+}
+
+input[type="submit" i] {
+  border-radius: 100px;
 }
 
 /* Navigation */
@@ -235,7 +271,6 @@ button:hover, button:focus, button.selected {
   font-size: 18px;
   padding-top: 1em;
 }
-
 
 p, .devise-links {
   font-family: 'Lato', sans-serif;
@@ -259,11 +294,6 @@ p, .devise-links {
   margin-bottom: 1em;
 }
 
-h1 {
-  font-family: 'Questrial', sans-serif;
-  font-size: 35px;
-}
-
 .return {
   max-width: 900px;
   margin: auto;
@@ -275,11 +305,6 @@ h1 {
   text-align: center;
   background-color: #DCC5B1;
   margin: 0;
-}
-
-.search {
-  text-align: left;
-  padding: 1em;
 }
 
 .customer {

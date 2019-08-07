@@ -70,8 +70,8 @@ class AdminRewardsContainer extends Component {
   }
 
   componentDidMount(){
-    let adminId = this.props.match.params.admin_id
-    let storeId = this.props.match.params.store_id
+    let adminId = this.props.adminId
+    let storeId = this.props.storeId
 
     fetch(`/api/v1/admins/${adminId}/stores/${storeId}`)
       .then(response => {
@@ -118,8 +118,7 @@ class AdminRewardsContainer extends Component {
 
     return(
       <div className="rewards-page">
-        <Link to={adminLink}>Go Back</Link>
-        <div className="rewards-container">
+        <div className="admin-view">
           {rewards}
           <div className="rewards-tile">
             <div className="text"></div>
