@@ -4,11 +4,13 @@ import QRCode from 'qrcode.react'
 const QrCode = (props) => {
 
   return(
-    <QRCode
-      value={props.userEmail}
-      size={300}
-      fgColor="#1B7B34"
-    />
+    <div className="qrCode">
+      <QRCode
+        value={props.userEmail}
+        size={300}
+        fgColor="#F4976C"
+      />
+    </div>
 
   )
 }

@@ -139,8 +139,8 @@ button {
 .user-options {
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: space-evenly;
+  max-width: 100%;
 }
 
 .user-options button {
@@ -148,7 +148,7 @@ button {
 }
 
 .drawer {
-  width: 100%;
+  max-width: 100%;
   display: flex;
 }
 
@@ -157,6 +157,10 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.qrCode {
+  padding: 4em;
 }
 
 .header {
@@ -170,6 +174,8 @@ button {
   font-size: 3em;
   padding: 1em;
 }
+
+/* Rewards Tiles */
 
 .rewards-tile {
   height: 400px;
@@ -194,6 +200,10 @@ button {
 
 .rewards-tile p {
   color: #000000;
+}
+
+.rewards-tile button, .button {
+  border-radius: 100px;
 }
 
 button, .button {
