@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_admin!, except: [:show]
+  before_action :authenticate_admin!, except: [:show, :update]
 
   def search
     @user = User.where(email: params['search_string'])
@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update!(points: @user.points + 10)
+    @user.update!(points: params["points"])
     render json: @user
   end
 

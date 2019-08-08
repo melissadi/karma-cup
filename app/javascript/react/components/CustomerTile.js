@@ -37,10 +37,11 @@ class CustomerTile extends Component {
   render(){
     return (
       <div className="customer">
-        <p className="columns large-4">{this.props.customer[0].email}</p>
-        <p className="columns large-4">{this.props.customer[0].first_name} {this.props.customer[0].last_name}</p>
-        <p className="columns large-4">{this.state.selectedCustomer.points} points available</p>
-        <button onClick={this.handleClick} className="button small" type="button">Give 10 Points</button>
+        <p>{this.props.customer[0].first_name} {this.props.customer[0].last_name} ({this.props.customer[0].email})</p>
+        <p>{this.state.selectedCustomer.points} points available</p>
+        <div>
+          <button onClick={this.handleClick} className="button small add-points" type="button">Give 10 Points</button>
+        </div>
       </div>
     )
   }

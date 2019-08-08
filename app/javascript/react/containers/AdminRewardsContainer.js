@@ -119,11 +119,11 @@ class AdminRewardsContainer extends Component {
     return(
       <div className="rewards-page">
         <div className="admin-view">
-          {rewards}
           <div className="rewards-tile">
             <div className="text"></div>
-            <button onClick={this.togglePopup.bind(this)}>Add New Reward</button>
+            <button className="round" onClick={this.togglePopup.bind(this)}>Add New Reward</button>
           </div>
+          {rewards}
         </div>
         {this.state.showPopup ?
         <FormPopup

@@ -13,19 +13,35 @@ class UserDashboard extends Component {
     }
     this.toggleQrCode = this.toggleQrCode.bind(this)
     this.toggleRewards = this.toggleRewards.bind(this)
+    this.redeemPoints = this.redeemPoints.bind(this)
   }
 
-  toggleRewards(event){
+  redeemPoints(pointsToRedeem) {
+    let formPayload = JSON.stringify({
+      points: this.state.userObject.points - pointsToRedeem
+    })
+    fetch(`/api/v1/users/${this.state.userObject.id}`, {
+      method: 'PATCH',
+      body: formPayload,
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(body => this.setState({ userObject: body }))
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+
+  toggleRewards(event) {
     this.setState({ selectRewards: !this.state.selectRewards})
     this.setState({ selectQrCode: false })
   }
 
-  toggleQrCode(event){
+  toggleQrCode(event) {
     this.setState({ selectQrCode: !this.state.selectQrCode})
     this.setState({ selectRewards: false })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let userId = this.props.match.params.id
 
     fetch(`/api/v1/users/${userId}`)
@@ -43,7 +59,7 @@ class UserDashboard extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  render(){
+  render() {
 
     let pointsStats
     if (this.state.userObject.points && this.state.userObject.points > 0){
@@ -54,7 +70,7 @@ class UserDashboard extends Component {
 
     let qrcode
     let qrSelected
-    if (this.state.selectQrCode){
+    if (this.state.selectQrCode) {
       qrcode =
         <QrCode
           userEmail={this.state.userObject.email}
@@ -64,33 +80,29 @@ class UserDashboard extends Component {
 
     let rewards
     let rewardsSelected
-    if (this.state.selectRewards){
+    if (this.state.selectRewards) {
       rewards =
         <UserRewardsContainer
           userPoints={this.state.userObject.points}
+          redeemPoints={this.redeemPoints}
         />
       rewardsSelected = "selected"
     }
 
-
     return(
       <div className="user-dashboard">
-
         <div className="header">
           <h1>Welcome, {this.state.userObject.first_name}. {pointsStats}</h1>
         </div>
-
         <div className="user-options">
           <div><button type="button" className={qrSelected} onClick={this.toggleQrCode}>My QR Code</button></div>
           <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Rewards</button></div>
           <div><button>Cafes Near Me</button></div>
         </div>
-
         <div className="drawer">
           {qrcode}
           {rewards}
         </div>
-
       </div>
     )
   }

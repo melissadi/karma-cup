@@ -8,7 +8,7 @@ const QrCode = (props) => {
       <QRCode
         value={props.userEmail}
         size={300}
-        fgColor="#F4976C"
+        fgColor="#000000"
       />
     </div>
 
