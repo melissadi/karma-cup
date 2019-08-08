@@ -27,7 +27,7 @@ class QrScanner extends Component {
       .then(body => this.setState({ scannedCustomer: body }))
       .then(() => {
         let formPayload = {
-          points: this.state.scannedCustomer.points + 10
+          points: this.state.scannedCustomer[0].points + 10
         }
         return fetch(`/api/v1/users/${this.state.scannedCustomer[0].id}`, {
           method: 'PATCH',
@@ -54,7 +54,8 @@ class QrScanner extends Component {
 
     let qrScanner
     if (!this.state.scannedCustomer){
-      qrScanner = <QrReader
+      qrScanner =
+      <QrReader
         delay={500}
         onError={this.handleError}
         onScan={this.handleScan}
@@ -63,7 +64,7 @@ class QrScanner extends Component {
     }
 
     return (
-      <div>
+      <div className="scanner-section">
         {qrScanner}
         {message}
       </div>

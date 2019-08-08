@@ -114,10 +114,8 @@ class AdminDashboard extends Component {
     let scanner
     if (this.state.showScanner){
       scanner =
-        <div className="scanner-section">
           <QrScanner
           />
-        </div>
       scannerSelected = "selected"
     }
 
@@ -158,11 +156,13 @@ class AdminDashboard extends Component {
         <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Update Store Rewards</button></div>
       </div>
 
-      <div className="drawer">
+      <div className="admin-drawer">
         {scanner}
-        {search}
-        {user}
-        {rewards}
+        <div className="admin-sub-drawer">
+          {search}
+          {user}
+          {rewards}
+        </div>
       </div>
 
     </div>
