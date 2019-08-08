@@ -342,6 +342,40 @@ input[type="submit" i] {
   border-radius: 100px;
 }
 
+table {
+  background: #FFFFFF;
+  border: solid 2px #F4976C;
+  margin-bottom: 1.25rem;
+  table-layout: auto;
+  font-family: "Lato", sans-serif;
+}
+
+td p, th p {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+th p {
+  color: #303C6C;
+}
+
+.points-redeemed-tile, .points-earned-tile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.points-earned, .points-redeemed {
+  display: flex;
+  flex-direction: column;
+}
+
+.points-history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 /* Navigation */
 
 .top-bar {

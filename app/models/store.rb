@@ -5,4 +5,5 @@ class Store < ApplicationRecord
 
   has_many :rewards
   has_many :admins
+  has_many :exchanges
 end

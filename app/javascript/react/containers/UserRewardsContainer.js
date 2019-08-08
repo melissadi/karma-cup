@@ -38,6 +38,7 @@ class UserRewardsContainer extends Component {
             store={reward.store}
             userPoints={this.props.userPoints}
             redeemPoints={this.props.redeemPoints}
+            userId={this.props.userId}
           />
         )
       })

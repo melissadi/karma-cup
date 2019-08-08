@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_160439) do
+ActiveRecord::Schema.define(version: 2019_08_08_162959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 2019_08_02_160439) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["store_id"], name: "index_admins_on_store_id"
+  end
+
+  create_table "exchanges", force: :cascade do |t|
+    t.integer "points_given", default: 0, null: false
+    t.integer "points_redeemed", default: 0, null: false
+    t.bigint "user_id"
+    t.bigint "store_id"
+    t.bigint "reward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_exchanges_on_reward_id"
+    t.index ["store_id"], name: "index_exchanges_on_store_id"
+    t.index ["user_id"], name: "index_exchanges_on_user_id"
   end
 
   create_table "rewards", force: :cascade do |t|

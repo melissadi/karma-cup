@@ -37,10 +37,11 @@ class RewardTile extends Component {
         {redeem}
         {this.state.showPopup ?
         <RedemptionPopup
-          text='Redeem Reward'
+          text='Ready To Redeem?'
           closePopup={this.togglePopup.bind(this)}
           redeemPoints={this.props.redeemPoints}
           requiredPoints={this.props.reward.point_value}
+          reward={this.props.reward}
         />
         : null
         }

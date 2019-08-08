@@ -26,18 +26,18 @@ class RewardTile extends Component {
         <div className="text">
           <h1>{this.props.name}</h1>
           <p>{this.props.description}</p>
-          <p>Points Needed: {this.props.pointValue}</p>
+          <p>Points Required: {this.props.pointValue}</p>
         </div>
         <button className="round" onClick={this.togglePopup.bind(this)}>Edit</button>
         <button className="round" onClick={this.handleClick}>Delete</button>
         {this.state.showPopup ?
           <FormPopup
-          text="Edit Reward"
-          closePopup={this.togglePopup.bind(this)}
-          rewardId={this.props.rewardId}
-          storeId={this.props.storeId}
-          selectReward={this.props.selectReward}
-          closePopup={this.togglePopup.bind(this)}
+            text="Edit Reward"
+            closePopup={this.togglePopup.bind(this)}
+            rewardId={this.props.rewardId}
+            storeId={this.props.storeId}
+            selectReward={this.props.selectReward}
+            closePopup={this.togglePopup.bind(this)}
           />
           : null
         }

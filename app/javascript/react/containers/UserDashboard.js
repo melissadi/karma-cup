@@ -1,24 +1,30 @@
 import React, { Component } from "react"
 import QrCode from '../components/QrCode'
 import UserRewardsContainer from './UserRewardsContainer'
+import RewardsHistoryContainer from './RewardsHistoryContainer'
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       userObject: {},
+      rewardObject: {},
       selectQrCode: false,
       selectRewards: false,
-      selectStore: false,
+      selectHistory: false,
+      selectStore: false
     }
     this.toggleQrCode = this.toggleQrCode.bind(this)
     this.toggleRewards = this.toggleRewards.bind(this)
+    this.toggleHistory = this.toggleHistory.bind(this)
     this.redeemPoints = this.redeemPoints.bind(this)
   }
 
-  redeemPoints(pointsToRedeem) {
+  redeemPoints(rewardObject) {
+    let reward = rewardObject
+    let user = this.state.userObject
     let formPayload = JSON.stringify({
-      points: this.state.userObject.points - pointsToRedeem
+      points: this.state.userObject.points - rewardObject.point_value
     })
     fetch(`/api/v1/users/${this.state.userObject.id}`, {
       method: 'PATCH',
@@ -27,18 +33,42 @@ class UserDashboard extends Component {
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
-    .then(body => this.setState({ userObject: body }))
+    .then(body => this.setState({ userObject: body.user }))
+    .then(() => {
+      let formPayload = {
+        user_id: user.id,
+        store_id: reward.store.id,
+        reward_id: reward.id,
+        points_redeemed: reward.point_value
+      }
+      return fetch(`/api/v1/exchanges`, {
+        method: 'POST',
+        body: JSON.stringify(formPayload),
+        credentials: 'same-origin',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(body => this.setState({ rewardObject: body }))
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-    }
+  }
 
   toggleRewards(event) {
     this.setState({ selectRewards: !this.state.selectRewards})
     this.setState({ selectQrCode: false })
+    this.setState({ selectHistory: false })
   }
 
   toggleQrCode(event) {
     this.setState({ selectQrCode: !this.state.selectQrCode})
     this.setState({ selectRewards: false })
+    this.setState({ selectHistory: false })
+  }
+
+  toggleHistory(event) {
+    this.setState({ selectHistory: !this.state.selectHistory})
+    this.setState({ selectRewards: false })
+    this.setState({ selectQrCode: false })
   }
 
   componentDidMount() {
@@ -55,7 +85,7 @@ class UserDashboard extends Component {
         }
       })
       .then(response => response.json())
-      .then(userObject => this.setState({ userObject: userObject }))
+      .then(userObject => this.setState({ userObject: userObject["user"] }))
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -85,23 +115,36 @@ class UserDashboard extends Component {
         <UserRewardsContainer
           userPoints={this.state.userObject.points}
           redeemPoints={this.redeemPoints}
+          userId={this.state.userObject.id}
         />
       rewardsSelected = "selected"
+    }
+
+    let history
+    let historySelected
+    if (this.state.selectHistory) {
+      history =
+        <RewardsHistoryContainer
+          user={this.state.userObject}
+        />
+      historySelected = "selected"
     }
 
     return(
       <div className="user-dashboard">
         <div className="header">
-          <h1>Welcome, {this.state.userObject.first_name}. {pointsStats}</h1>
+          <h1>Welcome, {this.state.userObject.first_name}</h1>
+          <h2>{pointsStats}</h2>
         </div>
         <div className="user-options">
           <div><button type="button" className={qrSelected} onClick={this.toggleQrCode}>My QR Code</button></div>
-          <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Rewards</button></div>
-          <div><button>Cafes Near Me</button></div>
+          <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Current Offers</button></div>
+          <div><button type="button" className={historySelected} onClick={this.toggleHistory}>My Rewards History</button></div>
         </div>
         <div className="drawer">
           {qrcode}
           {rewards}
+          {history}
         </div>
       </div>
     )

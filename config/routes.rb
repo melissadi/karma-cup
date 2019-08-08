@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show, :update]
       resources :rewards, only: [:index, :show]
+      resources :exchanges, only: [:index, :show, :create, :update]
       resources :stores, only: [:index, :show, :update] do
         resources :rewards, only: [:index, :show, :create, :destroy, :update]
       end
