@@ -9,7 +9,7 @@ class RedemptionPopup extends React.Component {
 
   handleClick(event){
     event.preventDefault()
-    this.props.redeemPoints(this.props.requiredPoints)
+    this.props.redeemPoints(this.props.reward)
     this.props.closePopup()
   }
 
@@ -28,7 +28,7 @@ class RedemptionPopup extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 

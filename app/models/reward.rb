@@ -5,4 +5,6 @@ class Reward < ApplicationRecord
   validates :store_id, presence: true
 
   belongs_to :store
+  has_many :exchanges
+  has_many :users, through: :exchanges
 end
