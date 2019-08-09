@@ -17,31 +17,52 @@
  */
 .home {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: auto;
   margin-top: 4em;
   max-width: 1200px;
   height: 100%;
 }
 
-.header-image {
-  background: no-repeat url('./alonecup.jpg');
-  width: 50%;
-  background-size: contain;
-  height: 80%;
-  margin-right: 4em;
+.home-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
+
+.header-image-three {
+  background: no-repeat url('./masonjar.jpg');
+  width: 33%;
+  height: 300px;
+  background-size: cover;
+  opacity: .9;
+}
+
+.header-image-one {
+  background: no-repeat url('./alonecup.jpg');
+  width: 33%;
+  height: 300px;
+  background-size: cover;
+  background-position: 50% 70%;
+  opacity: .9;
+}
+
+.header-image-two {
+  background: no-repeat url('./waterbottle.jpg');
+  width: 33%;
+  height: 300px;
+  background-size: cover;
+  background-position: 50% 60%;
+  opacity: .9;
+}
+
 
 .front-page h2 {
   font-family: 'Questrial', sans-serif;
-  background-color: #303C6C;
-  color: #FFFFFF;
-  width: 12em;
-  height: 3.5em;
+  color: #303C6C;
   text-align: center;
   font-size: 40px;
-  padding: .25em;
-  margin-bottom: 2em;
+  padding-bottom: 1em;
 }
 
 .front-page h3 {
@@ -95,6 +116,26 @@
 }
 
 .form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#homepage-button {
+  width: 33%;
+  border-radius: 0;
+  margin-top: 3em;
+}
+
+#homepage-button a {
+  color: #FFFFFF;
+}
+
+#homepage-button:hover a {
+  color: #000000;
+}
+
+.homepage-buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -287,7 +328,7 @@ submit {
 /* Rewards Tiles */
 
 .rewards-tile {
-  height: 450px;
+  height: 460px;
   width: 400px;
   background-color: #B4DFE580;
   display: flex;
@@ -303,7 +344,7 @@ submit {
 .rewards-tile .text {
   color: #000000;
   width: 100%;
-  padding: 1em;
+  padding: .5em 0 1em 0;
 }
 
 .new.rewards-tile {
@@ -502,12 +543,20 @@ p, .devise-links {
   }
 }
 
-@media only screen and (max-width: 1000px) and (max-height: 730px) {
+@media only screen and (max-width: 1000px) {
 
   .user-options, .admin-options {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 35px;
   }
 
   .top-bar-section li:not(.has-form) a:not(.button) {

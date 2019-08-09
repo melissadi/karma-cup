@@ -1,17 +1,24 @@
 <div class="home">
-  <section class="header-image"></section>
   <section class="front-page">
     <h2>Bring your own cup and get rewarded.</h2>
 
+    <section class="home-banner">
+      <div class="header-image-one"></div>
+      <div class="header-image-two"></div>
+      <div class="header-image-three"></div>
+    </section>
+
+    <div class="homepage-buttons">
     <%- if current_user -%>
       <h3>Welcome back!</h3>
     <%- elsif current_admin -%>
       <h3>Welcome back!</h3>
     <%- else -%>
-      <h3><%= link_to 'User Sign Up', new_user_registration_path %></h3>
-      <h3><%= link_to 'User Sign In', new_user_session_path %></h3>
-      <h3><%= link_to 'Admin Sign In', new_admin_session_path %></h3>
+      <button type="button" id="homepage-button"><%= link_to 'User Sign Up', new_user_registration_path %></button>
+      <button type="button" id="homepage-button"><%= link_to 'User Sign In', new_user_session_path %></button>
+      <button type="button" id="homepage-button"><%= link_to 'Admin Sign In', new_admin_session_path %></button>
     <%- end -%>
+    </div>
 
   </section>
 </div>
