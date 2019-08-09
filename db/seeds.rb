@@ -23,16 +23,15 @@ User.create!([
   {email: "rocco@test.com", password: "password", first_name: "Rocco", last_name: "Little", points: 300, id: 3},
   {email: "sadie@test.com", password: "password", first_name: "Sadie", last_name: "Smith", points: 50, id: 4},
   {email: "wally@test.com", password: "password", first_name: "Wally", last_name: "Golf", points: 20, id: 5},
-  {email: "ben@test.com", password: "password", first_name: "Benny", last_name: "Rei", points: 250, id: 6}
+  {email: "benny@test.com", password: "password", first_name: "Benny", last_name: "Rei", points: 250, id: 6},
+  {email: "ray@test.com", password: "password", first_name: "Ray", last_name: "Di", points: 0, id: 7}
   ])
 
 Reward.create!([
-  {name: "Free Coffee", description: "Get a free hot Stumptown coffee of any size", point_value: 100, store_id: 1, id: 1},
-  {name: "$10 Off", description: "Get $10 off your next in-store order", point_value: 1000, store_id: 1, id: 2},
-  {name: "Free Pastry", description: "Get a freshly baked pastry with your next in-store purchase", point_value: 400, store_id: 1, id: 3},
-  {name: "$5 Off", description: "Get $5 off your next in-person order", point_value: 500, store_id: 1, id: 4},
-  {name: "Small Bubble Tea", description: "Get a small bubble tea of any flavor", point_value: 100, store_id: 3, id: 5},
-  {name: "One Dozen Donuts", description: "Get twelves donuts of your choice", point_value: 500, store_id: 2, id: 6},
+  {name: "Free Coffee", description: "Get a free hot Stumptown coffee of any size", point_value: 100, store_id: 1, id: 100},
+  {name: "$5 Off", description: "Get $5 off your next in-person order", point_value: 500, store_id: 1, id: 400},
+  {name: "Small Bubble Tea", description: "Get a small bubble tea of any flavor", point_value: 100, store_id: 3, id: 500},
+  {name: "One Dozen Donuts", description: "Get twelves donuts of your choice", point_value: 500, store_id: 2, id: 600},
   ])
 
 Exchange.create!([
@@ -54,8 +53,8 @@ Exchange.create!([
   {points_given: 10, user_id: 1, store_id: 2, created_at: "2019-09-09 16:48:43"},
   {points_given: 10, user_id: 6, store_id: 2, created_at: "2019-08-07 16:48:43"},
   {points_given: 10, user_id: 6, store_id: 3, created_at: "2019-08-08 16:48:43"},
-  {points_redeemed: 100, user_id: 1, store_id: 1, reward_id: 1, created_at: "2019-10-02 16:48:43"},
-  {points_redeemed: 500, user_id: 2, store_id: 2, reward_id: 6, created_at: "2019-09-22 16:48:43"},
-  {points_redeemed: 100, user_id: 3, store_id: 1, reward_id: 1, created_at: "2019-09-30 16:48:43"},
-  {points_redeemed: 500, user_id: 4, store_id: 2, reward_id: 6, created_at: "2019-10-01 16:48:43"}
+  {points_redeemed: 100, user_id: 1, store_id: 1, reward_id: 100, created_at: "2019-10-02 16:48:43"},
+  {points_redeemed: 500, user_id: 2, store_id: 2, reward_id: 600, created_at: "2019-09-22 16:48:43"},
+  {points_redeemed: 100, user_id: 3, store_id: 1, reward_id: 100, created_at: "2019-09-30 16:48:43"},
+  {points_redeemed: 500, user_id: 4, store_id: 2, reward_id: 600, created_at: "2019-10-01 16:48:43"}
   ])

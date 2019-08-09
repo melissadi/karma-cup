@@ -15,7 +15,6 @@
  *= require foundation_and_overrides
 
  */
-
 .home {
   display: flex;
   flex-direction: row;
@@ -64,6 +63,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
   margin: auto;
   background-color: rgba(0,0,0, 0.7);
 }
@@ -80,23 +80,32 @@
 
 .reward-form-popup {
   width: 700px;
-  height: 700px;
-  border: 5px solid #0067B3;
+  box-shadow: 10px 10px 40px #000000;
   margin: auto;
-  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #FFFFFF;
   border-radius: 5px;
   padding: 1em;
 }
 
+.reward-form-popup h1 {
+  text-align: center;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .redemption {
-  width: 40%;
-  height: 30%;
   margin: auto;
   margin-top: 25%;
   background-color: #FFFFFF;
   border-radius: 5px;
-  padding: 1em;
+  padding: 3em;
   box-shadow: 10px 10px 40px #000000;
   justify-content: center;
   align-items: center;
@@ -131,6 +140,8 @@
 
 .registration {
   padding: 5em;
+  width: 60%;
+  margin: auto;
 }
 
 input[type="submit" i] {
@@ -145,7 +156,7 @@ input[type="submit" i] {
 }
 
 .registration h2, .top-bar a {
-  color: #0067B3;
+  color: #303C6C;
   font-family: 'Questrial', sans-serif;
   font-size: 35px;
  }
@@ -158,10 +169,6 @@ input[type="submit" i] {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center
-}
-
-button {
-  width: 13em;
 }
 
 .first-section {
@@ -192,6 +199,7 @@ button {
 .admin-drawer {
   height: 80%;
   width: 80%;
+  margin-top: 1em;
 }
 
 .admin-sub-drawer {
@@ -200,12 +208,9 @@ button {
   align-items: center;
 }
 
-.user-options button, .admin-options button {
-  width: 30em;
-}
-
 .drawer {
   max-width: 80%;
+  margin-top: 1em;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -237,6 +242,7 @@ button {
   color: #303C6C;
   font-size: 1.5em;
   font-family: 'Lato', sans-serif;
+  padding: 0;
 }
 
 /* Admin Dashboard */
@@ -268,38 +274,46 @@ submit {
 .customer {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  overflow: auto;
+  padding: 1em 2em;
 }
 
 .customer p {
   padding: 0em 1em;
+  margin: 0;
 }
 
 /* Rewards Tiles */
 
 .rewards-tile {
-  height: 400px;
+  height: 450px;
   width: 400px;
   background-color: #B4DFE580;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   margin: 1em;
-  padding: 1em;
+  padding: 2.5em 2em;
   box-shadow: 2px 3px 3px #000000;
   align-items: center;
+  justify-content: space-between;
 }
 
 .rewards-tile .text {
   color: #000000;
-  height: 300px;
   width: 100%;
   padding: 1em;
 }
 
-.rewards-tile h1 {
+.new.rewards-tile {
+  justify-content: center;
+}
+
+.rewards-tile h1, .reward-form-popup h1 {
   font-size: 2em;
   font-family: 'Questrial', sans-serif;
-  border: 1px solid #303C6C;
+  border-bottom: 2px solid #303C6C;
   padding: .25em;
   width: 100%;
 }
@@ -315,22 +329,38 @@ submit {
   font-style: italic;
 }
 
-.rewards-tile.round button, .rewards-tile.round.button {
-  border-radius: 100px;
+/* Buttons */
+
+.user-options button, .admin-options button {
+  width: 30em;
+  margin: 1.5em 0em 1em 0em;
 }
 
-button, .button, .registration label, em, input[type="submit" i] {
+button, .button, input[type="submit" i] {
   background-color: #303C6C;
   color: #FFFFFF;
   transition: background-color 100ms ease-out;
   font-family: 'Lato', sans-serif;
   font-size: 1em;
+  border-radius: 100px;
+  width: 13em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.rewards-tile button, .rewards-tile .button, .rewards-tile input[type="submit" i] {
+  margin-bottom: .25em;
 }
 
 .button:hover, .button.add-points:hover, .button:focus, button:hover, button.add-points:hover, button:focus, button.selected {
   background-color: #B4DFE5;
   outline:0;
   color: #303C6C;
+  border-radius: 100px;
+}
+
+#dashboard-button {
+  border-radius: 0;
 }
 
 .button.add-points:focus, button.add-points:focus {
@@ -346,8 +376,27 @@ table {
   background: #FFFFFF;
   border: solid 2px #F4976C;
   margin-bottom: 1.25rem;
-  table-layout: auto;
   font-family: "Lato", sans-serif;
+  max-height: 400px;
+  width: 600px;
+  table-layout: fixed;
+}
+
+tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 250px;
+}
+
+thead tr {
+  display: block;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
 }
 
 td p, th p {
@@ -380,9 +429,7 @@ th p {
 
 .top-bar {
   background-color: #F4976C;
-  height: 4em;
-  display: flex;
-  justify-content: center;
+  height: 4.5em;
   padding: 1em;
 }
 
@@ -432,36 +479,10 @@ p, .devise-links {
   margin: 0;
 }
 
-.customer {
-  overflow: auto;
-  padding: 1em 2em;
-}
-
-.customer .button.small {
-  font-size: 15px;
-  padding: .5em;
-  width: 200px;
-}
-
 .scanner-section {
   max-width: 400px;
   max-height: 400px;
   margin: auto;
-}
-
-.admin-section button {
-  width: 250px;
-  radius: 5px;
-}
-
-button.round, .button.round {
-  display: inline-block;
-  margin: auto;
-  margin-bottom: 1em;
-}
-
-.reward-button {
-  margin: 1em;
 }
 
 .admin-section {
