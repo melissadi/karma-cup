@@ -22,8 +22,8 @@ class RedemptionPopup extends React.Component {
             <h1>{this.props.text}</h1>
             <h2>Would you like to redeem {this.props.requiredPoints} points?</h2>
             <div className="popup-options">
-              <button onClick={this.handleClick} type="button" className="popup-button">Redeem</button>
-              <button onClick={this.props.closePopup} className="popup-button">Cancel</button>
+              <button onClick={this.handleClick} type="button" className="form-button">Redeem</button>
+              <button onClick={this.props.closePopup} className="form-button">Cancel</button>
             </div>
           </div>
         </div>

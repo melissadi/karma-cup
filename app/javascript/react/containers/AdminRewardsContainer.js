@@ -119,8 +119,7 @@ class AdminRewardsContainer extends Component {
     return(
       <div className="rewards-page">
         <div className="admin-view">
-          <div className="rewards-tile">
-            <div className="text"></div>
+          <div className="new rewards-tile">
             <button className="round" onClick={this.togglePopup.bind(this)}>Add New Reward</button>
           </div>
           {rewards}

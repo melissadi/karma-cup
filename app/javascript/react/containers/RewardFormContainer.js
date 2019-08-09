@@ -99,10 +99,10 @@ class RewardFormContainer extends Component {
     let value
     let handleSubmit
     if (this.state.newReward){
-      value = "Create Reward"
+      value = "Create"
       handleSubmit = this.addReward
     } else {
-      value = "Edit Reward"
+      value = "Save"
       handleSubmit = this.editReward
     }
 
@@ -115,6 +115,7 @@ class RewardFormContainer extends Component {
           type="text"
           handleChange={this.handleChange}
           value={this.state.name}
+          label="Name"
         />
         <Input
           name="description"
@@ -122,6 +123,7 @@ class RewardFormContainer extends Component {
           type="text"
           handleChange={this.handleChange}
           value={this.state.description}
+          label="Description"
         />
         <Input
           name="points"
@@ -129,8 +131,12 @@ class RewardFormContainer extends Component {
           type="text"
           handleChange={this.handleChange}
           value={this.state.points}
+          label="Points Required"
         />
-        <input type="submit" className="button" value={value}/>
+        <div className="form-buttons">
+          <input type="submit" className="form-button" value={value}/>
+          <button type="button" className="form-button" onClick={this.props.closePopup}>Go Back</button>
+        </div>
       </form>
     )
   }

@@ -54,19 +54,19 @@ class UserDashboard extends Component {
   }
 
   toggleRewards(event) {
-    this.setState({ selectRewards: !this.state.selectRewards})
+    this.setState({ selectRewards: true})
     this.setState({ selectQrCode: false })
     this.setState({ selectHistory: false })
   }
 
   toggleQrCode(event) {
-    this.setState({ selectQrCode: !this.state.selectQrCode})
+    this.setState({ selectQrCode: true})
     this.setState({ selectRewards: false })
     this.setState({ selectHistory: false })
   }
 
   toggleHistory(event) {
-    this.setState({ selectHistory: !this.state.selectHistory})
+    this.setState({ selectHistory: true})
     this.setState({ selectRewards: false })
     this.setState({ selectQrCode: false })
   }
@@ -85,7 +85,10 @@ class UserDashboard extends Component {
         }
       })
       .then(response => response.json())
-      .then(userObject => this.setState({ userObject: userObject["user"] }))
+      .then(userObject => this.setState({
+        userObject: userObject["user"],
+        selectQrCode: true
+      }))
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -96,6 +99,21 @@ class UserDashboard extends Component {
       pointsStats = `You have ${this.state.userObject.points} points.`
     } else {
       pointsStats = `You don't have any points at the moment. Remember your cup to earn some today!`
+    }
+
+    let cupsSaved = 0
+    let cupsStats
+    if (this.state.userObject.exchanges){
+      this.state.userObject.exchanges.forEach(exchange => {
+        if (exchange.points_given > 0){
+          cupsSaved = cupsSaved + 1
+        }
+      })
+      if (cupsSaved > 0){
+        cupsStats = `You've saved ${cupsSaved} cups!`
+      }
+    } else {
+      cupsStats = "Remember to bring your cup to earn points!"
     }
 
     let qrcode
@@ -135,11 +153,12 @@ class UserDashboard extends Component {
         <div className="header">
           <h1>Welcome, {this.state.userObject.first_name}</h1>
           <h2>{pointsStats}</h2>
+          <h2>{cupsStats}</h2>
         </div>
         <div className="user-options">
-          <div><button type="button" className={qrSelected} onClick={this.toggleQrCode}>My QR Code</button></div>
-          <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Current Offers</button></div>
-          <div><button type="button" className={historySelected} onClick={this.toggleHistory}>My Rewards History</button></div>
+          <div><button type="button" id="dashboard-button" className={qrSelected} onClick={this.toggleQrCode}>My QR Code</button></div>
+          <div><button type="button" id="dashboard-button" className={rewardsSelected} onClick={this.toggleRewards}>Current Offers</button></div>
+          <div><button type="button" id="dashboard-button" className={historySelected} onClick={this.toggleHistory}>My Rewards History</button></div>
         </div>
         <div className="drawer">
           {qrcode}

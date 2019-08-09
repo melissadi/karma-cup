@@ -11,6 +11,7 @@ class AdminDashboard extends Component {
     super(props)
     this.state = {
       adminObject: {},
+      error: "",
       searchedUser: null,
       searchString: "",
       showSearch: false,
@@ -52,6 +53,10 @@ class AdminDashboard extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    this.setState({
+      searchedUser: null,
+      error: ""
+     })
     const body = JSON.stringify({
       search_string: this.state.searchString
     })
@@ -62,7 +67,17 @@ class AdminDashboard extends Component {
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
-    .then(body => this.setState({ searchedUser: body }))
+    .then(body => {
+      if (body.users.length === 0){
+        this.setState({
+          error: "User not found",
+        })
+      } else {
+        this.setState({
+          searchedUser: body["users"],
+        })
+      }
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -87,7 +102,7 @@ class AdminDashboard extends Component {
   render(){
     let name
     let points
-    if (this.state.searchedUser != null){
+    if (this.state.searchedUser != null && this.state.searchedUser[0]){
       name = `${this.state.searchedUser[0].first_name} ${this.state.searchedUser[0].last_name}`
       points = this.state.searchedUser[0].points
     }
@@ -132,10 +147,10 @@ class AdminDashboard extends Component {
           />
         </div>
       searchSelected = "selected"
-      if (this.state.searchedUser != null){
+      if (this.state.searchedUser != null && this.state.searchedUser[0]){
         user =
           <CustomerTile
-            customer={this.state.searchedUser}
+            customer={this.state.searchedUser[0]}
             key={this.state.searchedUser.id}
             handleClick={this.handleClick}
           />
@@ -144,27 +159,24 @@ class AdminDashboard extends Component {
 
     return(
     <div className="admin-dashboard">
-
       <div className="header">
         <h1>Welcome, {storeName} admin!</h1>
         <h2>What would you like to do?</h2>
       </div>
-
       <div className="admin-options">
-        <div><button type="button" className={searchSelected} onClick={this.toggleSearch}>Reward Customer by Email</button></div>
-        <div><button type="button" className={scannerSelected} onClick={this.toggleScanner}>Scan Customer Code</button></div>
-        <div><button type="button" className={rewardsSelected} onClick={this.toggleRewards}>Update Store Rewards</button></div>
+        <div><button type="bbutton" className={searchSelected} id="dashboard-button" onClick={this.toggleSearch}>Reward Customer by Email</button></div>
+        <div><button type="button" id="dashboard-button" className={scannerSelected} onClick={this.toggleScanner}>Scan Customer Code</button></div>
+        <div><button type="button" id="dashboard-button" className={rewardsSelected} onClick={this.toggleRewards}>Update Store Rewards</button></div>
       </div>
-
       <div className="admin-drawer">
         {scanner}
         <div className="admin-sub-drawer">
           {search}
+          <span>{this.state.error}</span>
           {user}
           {rewards}
         </div>
       </div>
-
     </div>
     )
   }

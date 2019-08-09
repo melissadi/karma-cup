@@ -14,7 +14,6 @@ class FormPopup extends React.Component {
             selectReward={this.props.selectReward}
             closePopup={this.props.closePopup}
           />
-          <button onClick={this.props.closePopup}>Go Back</button>
         </div>
       </div>
     );
