@@ -1,24 +1,8 @@
 class Api::V1::ExchangesController < ApplicationController
-  before_action :authenticate_admin!, except: [:index, :show, :update, :create]
-
-  def index
-    @exchanges = Exchange.all
-    render json: @exchanges
-  end
-
-  def show
-    id = params[:id]
-    render json: Exchange.find(id)
-  end
+  before_action :authenticate_any!
 
   def create
     @exchange = Exchange.create!(exchange_params)
-    render json: @exchange
-  end
-
-  def update
-    @exchange = Exchange.find(params[:id])
-    @exchange.update!(exchange_params)
     render json: @exchange
   end
 
@@ -26,6 +10,14 @@ class Api::V1::ExchangesController < ApplicationController
 
   def exchange_params
     params.require(:exchange).permit(:store_id, :reward_id, :user_id, :points_given, :points_redeemed)
+  end
+
+  def authenticate_any!
+    if admin_signed_in?
+        true
+    else
+      authenticate_user!
+    end
   end
 
 end

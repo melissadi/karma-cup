@@ -1,29 +1,27 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# KarmaCup
 
-Things you may want to cover:
+KaramaCup is an end-to-end application built on React and Rails that allows participating cafes reward Users with points when they reusable mugs to their cafe. It has two separate roles, Admin and User.
 
-* Ruby version
+https://vimeo.com/353011470
 
-* System dependencies
+## Project Status
 
-* Configuration
+This project is currently in progress. It is currently compatible with Chrome on desktop.
 
-* Database creation
+## Installation
 
-* Database initialization
+KarmaCup relies on npm packages and Ruby gems to run.
 
-* How to run the test suite
+```bash
+yarn install
+gem install bundler
+bundle install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Usage
 
-* Deployment instructions
+While this project is currently in progress, it can still be used in two separate ways:
 
-* ...
-
-
-$ npm install --save react-router-dom
-$ npm install --save prop-types
-$ npm install --save react-qr-reader
+1. Via Heroku [http://karmacup.herokuapp.com/]
+2. By running ```rails s``` and visiting ```localhost:3000``` in your browser.

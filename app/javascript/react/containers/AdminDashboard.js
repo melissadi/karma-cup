@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import SearchBar from '../components/SearchBar'
 import CustomerTile from '../components/CustomerTile'
 import AdminRewardsContainer from './AdminRewardsContainer'
+import AdminStatsContainer from './AdminStatsContainer'
 import QrScanner from '../components/QrScanner'
 
 class AdminDashboard extends Component {
@@ -16,33 +17,46 @@ class AdminDashboard extends Component {
       searchString: "",
       showSearch: false,
       showRewards: false,
-      showScanner: false
+      showScanner: false,
+      showData: false
     }
     this.toggleRewards = this.toggleRewards.bind(this)
     this.toggleScanner = this.toggleScanner.bind(this)
     this.toggleSearch = this.toggleSearch.bind(this)
+    this.toggleData = this.toggleData.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
   toggleScanner(event){
     event.preventDefault()
-    this.setState ({ showScanner: !this.state.showScanner })
+    this.setState ({ showScanner: true })
     this.setState ({ showRewards: false })
     this.setState ({ showSearch: false })
+    this.setState ({ showData: false })
+  }
+
+  toggleData(event){
+    event.preventDefault()
+    this.setState ({ showData: true })
+    this.setState ({ showRewards: false })
+    this.setState ({ showSearch: false })
+    this.setState ({ showScanner: false })
   }
 
   toggleRewards(event){
     event.preventDefault()
-    this.setState ({ showRewards: !this.state.showRewards })
+    this.setState ({ showRewards: true })
     this.setState ({ showSearch: false })
+    this.setState ({ showData: false })
     this.setState ({ showScanner: false })
   }
 
   toggleSearch(event){
     event.preventDefault()
-    this.setState ({ showSearch: !this.state.showSearch })
+    this.setState ({ showSearch: true })
     this.setState ({ showScanner: false })
+    this.setState ({ showData: false })
     this.setState ({ showRewards: false })
   }
 
@@ -95,7 +109,10 @@ class AdminDashboard extends Component {
         }
       })
       .then(response => response.json())
-      .then(adminObject => this.setState({ adminObject: adminObject.admin }))
+      .then(adminObject => this.setState({
+        adminObject: adminObject.admin,
+        showSearch: true,
+       }))
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -129,9 +146,18 @@ class AdminDashboard extends Component {
     let scanner
     if (this.state.showScanner){
       scanner =
-          <QrScanner
-          />
+        <QrScanner
+        />
       scannerSelected = "selected"
+    }
+
+    let dataSelected
+    let data
+    if (this.state.showData){
+      dataSelected = "selected"
+      data =
+        <AdminStatsContainer
+        />
     }
 
     let user
@@ -164,9 +190,10 @@ class AdminDashboard extends Component {
         <h2>What would you like to do?</h2>
       </div>
       <div className="admin-options">
-        <div><button type="bbutton" className={searchSelected} id="dashboard-button" onClick={this.toggleSearch}>Reward Customer by Email</button></div>
+        <div><button type="button" className={searchSelected} id="dashboard-button" onClick={this.toggleSearch}>Reward Customer by Email</button></div>
         <div><button type="button" id="dashboard-button" className={scannerSelected} onClick={this.toggleScanner}>Scan Customer Code</button></div>
         <div><button type="button" id="dashboard-button" className={rewardsSelected} onClick={this.toggleRewards}>Update Store Rewards</button></div>
+        <div><button type="button" id="dashboard-button" className={dataSelected} onClick={this.toggleData}>View Rewards Stats</button></div>
       </div>
       <div className="admin-drawer">
         {scanner}
@@ -175,6 +202,7 @@ class AdminDashboard extends Component {
           <span>{this.state.error}</span>
           {user}
           {rewards}
+          {data}
         </div>
       </div>
     </div>
