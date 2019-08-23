@@ -1,7 +1,7 @@
 
 # KarmaCup
 
-KaramaCup is an end-to-end application built on React and Rails that allows participating cafes reward Users with points when they reusable mugs to their cafe. It has two separate roles, Admin and User.
+KaramaCup is an end-to-end application built on React and Rails that allows participating cafes reward Users with points when they reusable mugs to their cafe.
 
 https://vimeo.com/353011470
 
