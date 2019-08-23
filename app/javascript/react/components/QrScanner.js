@@ -49,7 +49,7 @@ class QrScanner extends Component {
   render(){
     let message
     if (this.state.scannedCustomer){
-      message = "Points added!"
+      message = `10 points added to ${this.state.scannedCustomer.users[0].first_name}'s account!`
     }
 
     let qrScanner
