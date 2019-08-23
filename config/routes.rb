@@ -4,16 +4,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :admins, only: [:show] do
-        resources :stores, only: [:index, :show] do
-          resources :rewards, only: [:index, :show]
-        end
-      end
-    end
-  end
-
-  namespace :api do
-    namespace :v1 do
       post 'users/search', to: 'users#search'
     end
   end
@@ -21,10 +11,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :update]
-      resources :rewards, only: [:index, :show]
+      resources :rewards, only: [:index]
       resources :exchanges, only: [:index, :show, :create, :update]
+      resources :admins, only: [:show]
       resources :stores, only: [:index, :show, :update] do
-        resources :rewards, only: [:index, :show, :create, :destroy, :update]
+        resources :rewards, only: [:create, :destroy, :update, :show]
       end
     end
   end

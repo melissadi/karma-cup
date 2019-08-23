@@ -55,7 +55,6 @@ class AdminRewardsContainer extends Component {
       })
   }
 
-
   deleteReward(rewardToDelete){
     let body = JSON.stringify(rewardToDelete)
     fetch (`/api/v1/stores/${this.state.storeObject.id}/rewards/${rewardToDelete.id}`, {
@@ -73,7 +72,7 @@ class AdminRewardsContainer extends Component {
     let adminId = this.props.adminId
     let storeId = this.props.storeId
 
-    fetch(`/api/v1/admins/${adminId}/stores/${storeId}`)
+    fetch(`/api/v1/admins/${adminId}`)
       .then(response => {
         if(response.ok){
           return response;
@@ -84,7 +83,7 @@ class AdminRewardsContainer extends Component {
         }
       })
       .then(response => response.json())
-      .then(body => this.setState({ storeObject: body["store"] }))
+      .then(body => this.setState({ storeObject: body.admin.store }))
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 

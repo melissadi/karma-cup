@@ -3,7 +3,7 @@ class Api::V1::AdminsController < ApplicationController
 
   def show
     id = params[:id]
-    render json: Admin.find(id)
+    render json: Admin.find(id), include: ["store", "store.rewards"]
   end
 
 end
